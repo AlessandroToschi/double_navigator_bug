@@ -1,16 +1,18 @@
 # doube_navigator_bug
 
-A new Flutter project.
+A reproducible project to demonstrate the double navigator bug.
 
-## Getting Started
+- Navigator A
+  - Press me button
+  - Navigator B
+    - Page 1
+      - Solid green UiKitView
+      - Push opaque route button
+      - Push transparent route button
+      - Page 2
+        - Dismiss me button
 
-This project is a starting point for a Flutter application.
+Problem:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+With two navigators, when we pop the Navigator A when the Page 2 is presented (and so the Navigator B), we expect the UiKitView is deallocated.
+Unfortunately, this occurs only when the Page 2 is a transparent `PageRoute`, and not an opaque one.
